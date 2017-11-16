@@ -10,7 +10,16 @@
   </head>
   <body>
     <div class="w3-bar w3-green w3-xlarge">
-	<a class="w3-bar-item w3-button w3-right" href="/index"><i class="fa fa-home"></i></a>
+	<ul class="w3-ul">
+	    <a class="w3-bar-item w3-button w3-left" href="/index">
+	        <li class="w3-padding-16">HouseOfPi</li>
+	    </a>
+	    <a class="w3-bar-item w3-button w3-right" href="/index">
+	        <li class="w3-xxxlarge">
+	            <i class="fa fa-home"></i>
+	        </li>
+	    </a>
+	</ul>
     </div>
     {% block content %}{% endblock %}
   </body>
