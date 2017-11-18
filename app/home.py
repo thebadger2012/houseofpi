@@ -5,13 +5,14 @@ from flask import Flask
 from flask import render_template
 
 app = Flask(__name__)
+app.config["DEBUG"] = True
 
 @app.route('/')
 
 @app.route('/index')
 def hello():
-	user = { 'nickname': 'Peter' }	
-	return render_template('index.html', 
+	user = { 'nickname': 'Peter' }
+	return render_template('index.html',
 				title='Welcome to HouseOfPi',
 				user=user)
 
