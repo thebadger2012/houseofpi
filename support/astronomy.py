@@ -1,5 +1,5 @@
 # 'http://api.wunderground.com/api/328899821f159ed8/astronomy/1/q/pws:IONTARIO1075.json'
-# from crontab import CronTab
+from crontab import CronTab
 import urllib3, codecs, json, sqlite3, datetime
 proxy = urllib3.ProxyManager('http://proxy.server:3128', maxsize=10)
 reader = codecs.getreader('utf-8')
@@ -14,17 +14,18 @@ srmin = data['sun_phase']['sunrise']['minute']
 sshour = data['sun_phase']['sunset']['hour']
 ssmin = data['sun_phase']['sunset']['minute']
 
-#my_cron = CronTab(user='thebadger2017')
-#for job in my_cron:
-#    if job.comment == 'sunrise':
-#        job.minute.on(srmin)
-#        job.hour.on(srhour)
-#        my_cron.write()
+my_cron = CronTab(user='thebadger2017')
+#my_cron = CronTab()
+for job in my_cron:
+    if job.comment == 'sunrise':
+        job.minute.on(srmin)
+        job.hour.on(srhour)
+        my_cron.write()
 #  #     print(job)
-#    if job.comment == 'sunset':
-#        job.minute.on(ssmin)
-#        job.hour.on(sshour)
-#        my_cron.write()
+    if job.comment == 'sunset':
+        job.minute.on(ssmin)
+        job.hour.on(sshour)
+        my_cron.write()
 #  #  print(job)
 
 sunrise = srhour + ":" + srmin
