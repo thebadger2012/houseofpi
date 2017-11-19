@@ -1,0 +1,20 @@
+
+# A very simple Flask Hello World app for you to get started with...
+import sqlite3
+from flask import Flask
+from flask import render_template
+
+database = '/home/thebadger2017/houseofpi/houseofpi/db/suntimes.sdb'
+
+app = Flask(__name__)
+app.config["DEBUG"] = True
+
+@app.route('/')
+
+@app.route('/index')
+def hello():
+	user = { 'nickname': 'Peter' }
+	return render_template('index.html',
+				title='Welcome to HouseOfPi',
+				user=user)
+
