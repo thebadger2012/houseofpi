@@ -1,6 +1,6 @@
 
 # A very simple Flask Hello World app for you to get started with...
-
+# import sqlite3
 from flask import Flask
 from flask import render_template
 
@@ -13,6 +13,5 @@ app.config["DEBUG"] = True
 def hello():
 	user = { 'nickname': 'Peter' }
 	return render_template('index.html',
-				title='Welcome to HouseOfPi',
-				user=user)
-
+		title='Welcome to HouseOfPi',
+		user=user)

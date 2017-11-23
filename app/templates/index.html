@@ -1,8 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
+<h1>Devices</h1>
+<div id="devices"></div>
+<script>
+$(function() {
+        $.ajax({
+            url: "http://thebadger2017.pythonanywhere.com/devices/",
+            dataType: "json",
+            action: "GET",
+            success: function(data) {
+                alert(data.devices[0]["ddev"]);
+                }
+            });
+        }
+);
 
-    <h1>Hi, {{ user.nickname }}!</h1>
-
+</script>
 {% endblock %}
 

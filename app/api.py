@@ -1,6 +1,6 @@
 
 # api for restful access
-from flask import Flask, render_template
+from flask import Flask, render_template,  redirect, url_for
 from flask_restful import Resource, Api
 from sqlalchemy import create_engine
 # from json import dumps
@@ -15,20 +15,16 @@ api = Api(app)
 
 @app.route('/')
 
-def hello():
-	user = { 'nickname': 'Peter' }
+def showIndex():
 	return render_template('index.html',
-				title='Welcome to HouseOfPi',
-				user=user)
-
-
+			title='Welcome to HouseOfPi')
 
 class Suntime_List(Resource):
     def get(self):
         conn = e.connect()
         query = conn.execute("select * from suntimes")
         #Query the result and get cursor.Dumping that data to a JSON is looked by extension
-        result = {'devices': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
+        result = {'suntimes': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return result
         #We can have PUT,DELETE,POST here. But in our API GET implementation is sufficient
 
@@ -53,9 +49,9 @@ class multiply(Resource):
     def get(self, number):  # param must match uri identifier
         return number * 2
 
-api.add_resource(Suntime_List, '/suntimes')
-api.add_resource(Statuses_List, '/status')
-api.add_resource(Devices_List, '/devices')
+api.add_resource(Suntime_List, '/suntimes/')
+api.add_resource(Statuses_List, '/status/')
+api.add_resource(Devices_List, '/devices/')
 api.add_resource(multiply, '/multiply/<int:number>')  # whatever the number is, multiply by 2
 
 if __name__ == '__main__':
