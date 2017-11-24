@@ -44,6 +44,14 @@ class Devices_List(Resource):
         result = {'devices': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return result
 
+class View_Status(Resource):
+    def get(self):
+        conn = e.connect()
+        query = conn.execute("select * from v_current_device_status")
+        #Query the result and get cursor.Dumping that data to a JSON is looked by extension
+        result = {'devices': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
+        return result
+
 class multiply(Resource):
     '''dummy function to test apis'''
     def get(self, number):  # param must match uri identifier
@@ -52,6 +60,10 @@ class multiply(Resource):
 api.add_resource(Suntime_List, '/suntimes/')
 api.add_resource(Statuses_List, '/status/')
 api.add_resource(Devices_List, '/devices/')
+api.add_resource(View_Status, '/viewstatus/')
+
+
+
 api.add_resource(multiply, '/multiply/<int:number>')  # whatever the number is, multiply by 2
 
 if __name__ == '__main__':

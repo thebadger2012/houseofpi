@@ -1,20 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Devices</h1>
-<div id="devices"></div>
+<div id="devices" class="w3-hoverable" style="font-size:36px;"></div>
 <script>
 $(function() {
+        var temp ="";
         $.ajax({
-            url: "http://thebadger2017.pythonanywhere.com/devices/",
+            url: "http://thebadger2017.pythonanywhere.com/viewstatus/",
             dataType: "json",
             action: "GET",
             success: function(data) {
-                alert(data.devices[0]["ddev"]);
-                }
+                for (i = 0; i < data.devices.length; i++) {
+                        temp = temp + "<div class='w3-row'><div class='w3-container w3-quarter'></div><div class='w3-half w3-teal w3-margin w3-round w3-hover'>";
+                        switch (data.devices[i].status) {
+                            case "0":
+                                temp = temp + " <i class='fa fa-lightbulb-o w3-margin-left w3-tooltip' style='font-size:36px;color:black;'></i> " + data.devices[i].desc + "<div class='w3-container w3-quarter'></div></div></div>";
+                                break;
+                            case "1":
+                                temp = temp + " <i class='fa fa-lightbulb-o w3-margin-left w3-tooltip' style='font-size:36px;color:yellow;'></i> " + data.devices[i].desc + "<div class='w3-container w3-quarter'></div></div></div>";
+                                break;
+                            default:
+                                temp = temp + " <i class='fa fa-lightbulb-o w3-margin-left w3-tooltip' style='font-size:36px;color:white;'></i> " + data.devices[i].desc + "<div class='w3-container w3-quarter'></div></div></div>";
+                                break;
+                           }
+
+                        }
+                    $("#devices").append(temp);
+                    }
+                });
             });
-        }
-);
 
 </script>
 {% endblock %}
